@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Rubik:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Brand Colors */
+    --primary: 220 100% 40%; /* #0044CC */
+    --primary-foreground: 0 0% 100%;
+    
+    --accent: 110 100% 54%; /* #39FF14 */
+    --accent-foreground: 220 100% 40%;
+    
+    --background: 0 0% 100%;
+    --foreground: 220 39% 11%; /* #111827 */
+    
+    --card: 0 0% 100%;
+    --card-foreground: 220 39% 11%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 39% 11%;
+    
+    --secondary: 220 14% 96%; /* #F3F4F6 */
+    --secondary-foreground: 220 39% 11%;
+    
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 220 100% 40%;
+    
+    --radius: 0.75rem;
+    
+    /* Glass Effect */
+    --glass-bg: 220 100% 40% / 0.05;
+    --glass-border: 220 100% 40% / 0.1;
+    
+    /* Sidebar */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 220 100% 40%;
+  }
+
+  .dark {
+    --background: 220 39% 6%;
+    --foreground: 0 0% 98%;
+    
+    --card: 220 39% 10%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 220 39% 10%;
+    --popover-foreground: 0 0% 98%;
+    
+    --primary: 220 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 220 39% 15%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 220 39% 15%;
+    --muted-foreground: 220 9% 65%;
+    
+    --accent: 110 100% 54%;
+    --accent-foreground: 220 39% 6%;
+    
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 220 39% 17%;
+    --input: 220 39% 17%;
+    --ring: 220 100% 50%;
+    
+    --glass-bg: 0 0% 100% / 0.05;
+    --glass-border: 0 0% 100% / 0.1;
+    
+    --sidebar-background: 220 39% 8%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 220 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 39% 12%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 220 39% 15%;
+    --sidebar-ring: 220 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Rubik', 'Poppins', sans-serif;
+  }
+  
+  /* RTL Support */
+  [dir="rtl"] body {
+    font-family: 'Rubik', sans-serif;
+  }
+}
+
+@layer components {
+  /* Glassmorphism Card */
+  .glass-card {
+    @apply backdrop-blur-xl border rounded-2xl;
+    background: hsl(var(--glass-bg));
+    border-color: hsl(var(--glass-border));
+  }
+  
+  /* Grid Background */
+  .grid-background {
+    background-image: 
+      linear-gradient(to right, hsl(var(--border)) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border)) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  
+  /* Gradient Text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+  }
+  
+  /* Accent Glow */
+  .accent-glow {
+    box-shadow: 0 0 40px hsl(var(--accent) / 0.3);
+  }
+  
+  /* Primary Gradient Button */
+  .btn-gradient {
+    @apply relative overflow-hidden;
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(220 100% 50%) 100%);
+  }
+  
+  .btn-gradient::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: linear-gradient(135deg, hsl(var(--accent)) 0%, hsl(110 100% 45%) 100%);
+  }
+  
+  .btn-gradient:hover::before {
+    @apply opacity-100;
+  }
+  
+  /* Booking Modal Input Styles */
+  .booking-input {
+    @apply rounded-lg border-2 border-input transition-all duration-200;
+    padding: 0.75rem 1rem;
+  }
+  
+  .booking-input:focus {
+    @apply outline-none border-[#0044CC] ring-4 ring-[#0044CC]/10;
+  }
+  
+  .booking-input::placeholder {
+    @apply text-muted-foreground/60;
+  }
+}
+
+@layer utilities {
+  /* Animation Utilities */
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out forwards;
+  }
+  
+  /* Delay Utilities */
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
